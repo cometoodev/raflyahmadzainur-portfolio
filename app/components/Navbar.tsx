@@ -12,11 +12,12 @@ export default function Navbar() {
     { name: "EDUCATION", id: "education" },
     { name: "PROJECTS", id: "projects" },
     { name: "ACHIEVEMENTS", id: "achievements" },
+    { name: "CERTIFICATES", id: "certificates" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'education', 'projects', 'achievements'];
+      const sections = ['home', 'about', 'experience', 'education', 'projects', 'achievements', 'certificates'];
       // Offset tambahan (misalnya 150px) agar menu berubah sebelum mencapai bagian paling atas
       const scrollPosition = window.scrollY + 150; 
 
@@ -44,7 +45,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl bg-white/90 backdrop-blur-md shadow-sm border border-slate-200 rounded-full px-6 py-3 flex items-center justify-between z-50 transition-all duration-300">
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md shadow-sm border border-slate-200 rounded-full px-6 py-3 flex items-center justify-between z-50 transition-all duration-300">
       
       {/* Left: Logo & Name */}
       <div className="group flex items-center gap-3 cursor-pointer bg-white/40 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/60 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:bg-white/60 transition-all duration-300">
