@@ -18,6 +18,22 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
+    id: 5,
+    logo: "/logos/tutwurihandayani.png",
+    role: "Fullstack & Wordpress Developer",
+    company: "Southeast Sulawesi Province Education Quality Assurance Agency",
+    timeline: "Sep 2026 – Present",
+    location: "Kendari, ID",
+    type: "INTERNSHIP",
+    typeBadgeClass: "bg-teal-50 text-teal-700 border border-teal-200",
+    bullets: [
+      "Developed and optimized multiple web-based systems, including the BPMP Official Portal, PPID Portal, SPD Management, and “Senin Berseri” Digital Attendance System.",
+      "Implemented centralized information management, automated scheduling validation, attendance and learning-hour tracking, E-Certificate generation, and public information services to improve administrative efficiency.",
+      "Developed educational quality dashboards and school evaluation systems for data visualization, performance monitoring, and data-driven educational quality assurance.",
+    ],
+    skills: ["Full-Stack Development", "WordPress", "Software Design"],
+  },
+  {
     id: 1,
     logo: "/logos/bi.png",
     role: "Programmer and Financial Data Analyst",

@@ -2,8 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Briefcase } from "lucide-react";
 
-export default function Projects() {
-  const projectsData = [
+export const projectsData = [
+    {
+      slug: 'ppid-bpmp',
+      badge: 'WEB',
+      title: 'Information and Documentation Management Officer of the Education Quality Assurance Center',
+      desc: 'Web-based Public Information and Documentation Management (PPID) portal for BPMP Southeast Sulawesi.',
+      image: '/project/ppid-bpmpsultra.png',
+      repoLink: 'https://github.com/cometoodev/ppid-sultra-laravel',
+      liveLink: 'https://ppid-bpmpsultra.page.gd/',
+      liveBtnText: 'View Website'
+    },
     {
       slug: 'bi-library',
       badge: 'WEB',
@@ -84,8 +93,9 @@ export default function Projects() {
       liveLink: '#',
       liveBtnText: 'View Project ↗'
     }
-  ];
+];
 
+export default function Projects() {
   return (
     <section id="projects" className="px-6 font-sans">
       <div className="max-w-6xl mx-auto">

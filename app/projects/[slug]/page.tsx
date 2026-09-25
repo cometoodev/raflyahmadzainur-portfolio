@@ -35,6 +35,31 @@ type ProjectData = {
 };
 
 const projectsData: Record<string, ProjectData> = {
+  "ppid-bpmp": {
+    badge: "WEB",
+    title: "Information and Documentation Management Officer of the Education Quality Assurance Center",
+    desc: "Web-based Public Information and Documentation Management (PPID) portal for BPMP Southeast Sulawesi.",
+    image: "/project/ppid-bpmpsultra.png",
+    repoLink: "https://github.com/cometoodev/ppid-sultra-laravel",
+    liveLink: "https://ppid-bpmpsultra.page.gd/",
+    liveBtnText: "View Website",
+
+    year: "2026",
+    role: "Fullstack Developer",
+    scope: "Professional",
+    techStack: "Laravel, Tailwind CSS, Alpine.js, MySQL, cPanel/Shared Hosting",
+    about: "Engineered to provide transparent, accessible, and centralized public information access for Balai Penjaminan Mutu Pendidikan (BPMP) Southeast Sulawesi. Features an advanced, bug-free web accessibility suite and interactive multi-channel WhatsApp helpdesk routing, overcoming complex frontend stacking context constraints to ensure seamless performance and inclusivity across all devices.",
+    techLabel: "Built on a modern Laravel monolith architecture paired with a highly optimized, lightweight Alpine.js frontend for reactive UI components.",
+    techBadges: ["Laravel", "Tailwind CSS", "Alpine.js", "MySQL", "cPanel / Shared Hosting (InfinityFree)"],
+    myRole: "Served as the Fullstack Web Developer, responsible for end-to-end development, from UI/UX implementation and accessibility engineering to database configuration and manual production deployment. Successfully debugged and resolved critical CSS stacking context constraints (DOM restructuring and Alpine.js teleports) to ensure absolute layout stability.",
+    features: [
+      "Advanced Accessibility Suite (Dyslexia font, link highlighting, dynamic letter/line spacing) engineered safely without CSS filter DOM conflicts.",
+      "Integrated Helpdesk Routing via interactive Floating Action Buttons connecting public users to ULT BPMP and Kemdikbud WhatsApp centers.",
+      "Centralized Information Dashboard for transparent and structured public data distribution.",
+      "Highly responsive and optimized frontend architecture using utility-first Tailwind CSS.",
+      "Production-ready deployment configuration optimized for strict shared hosting environments, ensuring vital assets and .env security.",
+    ],
+  },
   "bi-library": {
     badge: "WEB",
     title: "Bank Indonesia Library Management System",
@@ -307,12 +332,12 @@ export default async function ProjectDetailPage({
               />
             </div>
             <a 
-              href={project.repoLink || project.liveLink || '#'} 
+              href={project.liveLink && project.liveLink !== '#' ? project.liveLink : (project.repoLink || '#')} 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-2xl font-semibold hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md"
             >
-              {slug === 'audit-prototype' ? 'View Figma' : (slug === 'bi-library' ? 'View Website' : 'View Project on GitHub')} <ExternalLink className="w-4 h-4" />
+              {project.liveBtnText.replace(' ↗', '')} <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>

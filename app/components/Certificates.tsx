@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { BadgeCheck, ArrowUpRight } from "lucide-react";
 
-export default function Certifications() {
-  const [showAll, setShowAll] = useState(false);
-
-  const certificates = [
+export const certificatesData = [
     { org: "Badan Nasional Sertifikasi Profesi", title: "Sertifikat BNSP Junior Desain Grafis", link: "https://drive.google.com/file/d/1BGqn9OJbNJMjA2MmWz1MDytXGl0i6VTV/view?usp=drive_link" },
     { org: "Dicoding", title: "Memulai Pemrograman Dengan Java", link: "https://drive.google.com/file/d/1pdznmGgnq2uRoVWYrimMzNbDebLSZprj/view?usp=drive_link" },
     { org: "Coursera", title: "Create a Financial Statement using Microsoft Excel", link: "https://drive.google.com/file/d/1kkOl1BwRFBAaGk8oyPe3fPsVTIxVCCjT/view?usp=sharing" },
@@ -29,8 +26,11 @@ export default function Certifications() {
     { org: "Skilvul", title: "C# Dasar", link: "https://drive.google.com/file/d/1xkrbiaAa68uk12ZxOFSVCR7kMliHAyfH/view?usp=drive_link" }
   ];
 
+export default function Certifications() {
+  const [showAll, setShowAll] = useState(false);
+
   // Logika pemotongan array berdasarkan state showAll
-  const visibleCertificates = showAll ? certificates : certificates.slice(0, 8);
+  const visibleCertificates = showAll ? certificatesData : certificatesData.slice(0, 8);
 
   return (
     <section id="certificates" className="py-24 relative">

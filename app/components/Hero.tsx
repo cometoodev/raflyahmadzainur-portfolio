@@ -1,6 +1,44 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { Download, Star, Trophy, GraduationCap, MapPin } from "lucide-react";
+import { projectsData } from "./Projects";
+import { certificatesData } from "./Certificates";
+
+const typewriterWords = [
+  "Data Scientist",
+  "AI Enthusiast",
+  "Web Developer",
+  "Android Developer",
+  "Graphic Designer",
+  "UI/UX Designer"
+];
 
 export default function Hero() {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const typeSpeed = isDeleting ? 50 : 100;
+    const currentWord = typewriterWords[currentWordIndex];
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && currentText === currentWord) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && currentText === "") {
+        setIsDeleting(false);
+        setCurrentWordIndex((prev) => (prev + 1) % typewriterWords.length);
+      } else {
+        setCurrentText(
+          currentWord.substring(0, currentText.length + (isDeleting ? -1 : 1))
+        );
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentWordIndex]);
+
   return (
     <section className="relative w-full min-h-[90vh] flex flex-col font-sans overflow-hidden bg-slate-50">
       <style>{`
@@ -30,15 +68,24 @@ export default function Hero() {
           {/* Left Column (Text & CTA) */}
           <div className="flex flex-col items-start gap-8">
             
-            {/* Badge Atas */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-md text-blue-600 rounded-full text-sm font-bold border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-              <span className="text-base">✨</span> Data Scientist & Fullstack Developer
+            {/* Top Badges */}
+            <div className="flex flex-row flex-wrap items-center gap-3">
+              <div className="bg-blue-50 border border-blue-200 text-blue-600 rounded-full px-4 py-1.5 text-sm font-semibold flex items-center gap-2 w-fit">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                Open to Work · Available Now
+              </div>
             </div>
 
-            {/* Heading */}
-            <h1 className="font-extrabold text-5xl md:text-6xl lg:text-[4.5rem] text-slate-900 leading-[1.1] tracking-tight">
-              Building Smart <span className="text-blue-600">Digital Solutions.</span>
-            </h1>
+            {/* Heading & Typewriter */}
+            <div className="flex flex-col gap-2 mt-2">
+              <h1 className="font-extrabold text-5xl md:text-6xl lg:text-[4.5rem] bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 leading-[1.1] tracking-tight md:whitespace-nowrap">
+                Rafly Ahmad <span>Zainur</span>
+              </h1>
+              <div className="text-xl md:text-2xl font-semibold text-indigo-600 h-8 flex items-center">
+                <span>{currentText}</span>
+                <span className="animate-pulse ml-0.5 text-slate-400">|</span>
+              </div>
+            </div>
 
             {/* Sub-heading */}
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed max-w-xl font-medium">
@@ -46,7 +93,7 @@ export default function Hero() {
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-6 mt-4">
+            <div className="flex flex-wrap items-center gap-4 mt-4">
               <a 
                 href="mailto:raflyahmad22135@gmail.com"
                 className="flex items-center gap-2 px-8 py-4 bg-slate-900 text-white font-semibold rounded-full hover:bg-slate-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
@@ -54,7 +101,15 @@ export default function Hero() {
                 LET'S TALK ↗
               </a>
               
-              <div className="flex items-center gap-4">
+              <a 
+                href="/Rafly Ahmad Zainur - CV.pdf"
+                download
+                className="flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg shadow-blue-500/40 border border-transparent rounded-full hover:-translate-y-1 transition-all duration-300"
+              >
+                DOWNLOAD CV <Download className="w-4 h-4" />
+              </a>
+
+              <div className="flex items-center gap-4 ml-2">
                 <a 
                   href="https://linkedin.com/in/raflyahmadzainur"
                   target="_blank"
@@ -75,6 +130,24 @@ export default function Hero() {
               </div>
             </div>
 
+            {/* Quick Stats */}
+            <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-8 mt-6 pt-6 border-t border-slate-200/60 w-full max-w-lg">
+              <div className="flex flex-col">
+                <span className="text-3xl font-extrabold text-slate-900">{projectsData.length}+</span>
+                <span className="text-sm font-medium text-slate-500 mt-1">Projects</span>
+              </div>
+              <div className="w-px h-10 bg-slate-200"></div>
+              <div className="flex flex-col">
+                <span className="text-3xl font-extrabold text-slate-900">{certificatesData.length}+</span>
+                <span className="text-sm font-medium text-slate-500 mt-1">Certificates</span>
+              </div>
+              <div className="w-px h-10 bg-slate-200"></div>
+              <div className="flex flex-col">
+                <span className="text-3xl font-extrabold text-slate-900">{new Date().getFullYear() - 2023}+</span>
+                <span className="text-sm font-medium text-slate-500 mt-1">Years Experience</span>
+              </div>
+            </div>
+
           </div>
 
           {/* Right Column (Foto & Floating Badges) */}
@@ -82,27 +155,37 @@ export default function Hero() {
             <div className="relative w-full max-w-[320px] md:max-w-[400px] mx-auto lg:mx-0 mt-10 md:mt-0">
               
               {/* Image Container */}
-              <img
-                src="/fotoprofil.png"
-                alt="Rafly Ahmad Zainur"
-                className="rounded-[2rem] object-cover w-full h-auto bg-slate-50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-[6px] border-white/60 relative z-10 transform transition-transform hover:scale-[1.02] duration-500"
-              />
+              <div className="relative group rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-[6px] border-white/60 z-10 transform transition-transform hover:scale-[1.02] duration-500 bg-slate-50">
+                <img
+                  src="/fotoprofil.png"
+                  alt="Rafly Ahmad Zainur"
+                  className="w-full h-auto object-cover"
+                />
+                
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end">
+                  <div className="relative z-40 w-full px-8 pb-28 md:pb-32 pt-12 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-white font-black text-2xl drop-shadow-md tracking-tight">Rafly Ahmad Zainur</h3>
+                    <p className="text-white/80 text-xs uppercase tracking-widest mt-1 font-bold drop-shadow-sm">INFORMATICS ENGINEER</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Floating Badge 1 (Kanan Atas) */}
-              <div className="absolute -right-4 md:-right-8 -top-6 md:top-8 bg-indigo-600 text-white px-5 py-4 rounded-3xl shadow-xl flex flex-col items-center justify-center text-center z-20 hover:-translate-y-1 transition-transform animate-float">
-                <span className="text-3xl drop-shadow-md">🏆</span>
-                <span className="text-[10px] font-semibold tracking-widest text-indigo-200 mt-2">BPS TOP 25</span>
-                <span className="text-xs font-bold tracking-wide mt-0.5">NATIONAL FACILITATORS</span>
+              <div className="absolute -right-6 md:-right-8 -top-6 md:-top-8 bg-[#5B4CFF] text-white p-5 rounded-3xl shadow-xl shadow-indigo-500/40 flex flex-col items-center justify-center text-center z-50 hover:-translate-y-1 transition-transform animate-float">
+                <Trophy className="w-8 h-8 mb-2 text-white" />
+                <span className="text-[10px] text-indigo-200 tracking-widest font-bold uppercase mb-1">BPS TOP 25</span>
+                <span className="text-xs font-black text-white uppercase tracking-wider">NATIONAL FACILITATORS</span>
               </div>
 
               {/* Floating Badge 2 (Kiri Bawah) */}
-              <div className="absolute -left-4 md:-left-8 -bottom-6 md:bottom-8 bg-white/95 backdrop-blur-md border border-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-4 z-20 hover:-translate-y-1 transition-transform animate-float-delayed">
-                <div className="bg-indigo-50 p-3 rounded-xl flex items-center justify-center">
-                  <span className="text-2xl text-indigo-600">⭐</span>
+              <div className="absolute -left-6 md:-left-8 -bottom-6 md:-bottom-8 bg-white p-5 rounded-3xl shadow-2xl shadow-black/5 flex items-center gap-4 z-50 hover:-translate-y-1 transition-transform animate-float-delayed">
+                <div className="bg-indigo-50 p-3 md:p-4 rounded-2xl flex items-center justify-center">
+                  <Star className="w-6 h-6 text-indigo-600" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-3xl font-extrabold text-slate-900 leading-none">3.86</span>
-                  <span className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mt-1">CUMULATIVE GPA</span>
+                  <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase mt-1">CUMULATIVE GPA</span>
                 </div>
               </div>
             </div>
